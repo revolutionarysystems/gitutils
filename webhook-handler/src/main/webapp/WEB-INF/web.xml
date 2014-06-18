@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>Github Webhook Handler</display-name>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+			/WEB-INF/classes/applicationContext.xml
+		</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>webhookServlet</servlet-name>
+        <servlet-class>uk.co.revsys.gitutils.webhook.handler.WebhookHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>webhookServlet</servlet-name>
+        <url-pattern>/webhook</url-pattern>
+    </servlet-mapping>
+</web-app>

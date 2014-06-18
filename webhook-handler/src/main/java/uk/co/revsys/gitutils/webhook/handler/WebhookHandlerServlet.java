@@ -7,11 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class WebhookHandlerServlet extends HttpServlet {
 
+    Logger LOGGER = LoggerFactory.getLogger(WebhookHandlerServlet.class);
+    
     private WebhookHandler webhookHandler;
     
     @Override
@@ -24,8 +28,17 @@ public class WebhookHandlerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            webhookHandler.handle(req.getHeader("X-Github-Delivery"), req.getHeader("X-Hub-Signature"), req.getHeader("X-Github-Event"), IOUtils.toString(req.getInputStream()));
+            String requestId = req.getHeader("X-Github-Delivery");
+            LOGGER.debug("requestId = " + requestId);
+            String signature = req.getHeader("X-Hub-Signature");
+            LOGGER.debug("signature = " + signature);
+            String event = req.getHeader("X-Github-Event");
+            LOGGER.debug("event = " + event);
+            String json = IOUtils.toString(req.getInputStream());
+            LOGGER.debug("json = " + json);
+            webhookHandler.handle(requestId, signature, event, json);
         } catch (WebhookException ex) {
+            LOGGER.error("Unable to process webhook", ex);
             throw new ServletException(ex);
         }
     }

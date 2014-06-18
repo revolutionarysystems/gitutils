@@ -2,9 +2,9 @@ package uk.co.revsys.gitutils.webhook.handler;
 
 import java.io.File;
 import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +25,10 @@ public class CloneRepositoryWebhookHandler implements WebhookHandler {
         try {
             File dir = new File(directory);
             LOGGER.debug("Cloning " + repository + " into " + dir.getAbsolutePath());
-            FileUtils.delete(dir);
-            FileUtils.mkdirs(dir);
+            if(dir.exists()){
+                FileUtils.forceDelete(dir);
+            }
+            FileUtils.forceMkdir(dir);
             Git.cloneRepository().setURI(repository).setDirectory(dir).call();
         } catch (GitAPIException ex) {
             throw new WebhookException(ex);

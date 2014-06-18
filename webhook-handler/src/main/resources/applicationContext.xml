@@ -20,7 +20,6 @@
 	<bean id="webhookHandler" class="uk.co.revsys.gitutils.webhook.handler.CloneRepositoryWebhookHandler">
 		<constructor-arg index="0" value="${repository}"/>
         <constructor-arg index="1" value="${directory}"/>
-        <constructor-arg index="2" value="${secretKey}"/>
 	</bean>
 
 </beans>

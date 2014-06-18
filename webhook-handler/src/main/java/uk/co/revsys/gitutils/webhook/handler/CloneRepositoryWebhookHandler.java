@@ -8,21 +8,20 @@ import org.eclipse.jgit.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CloneRepositoryWebhookHandler extends SecuredWebhookHandler {
+public class CloneRepositoryWebhookHandler implements WebhookHandler {
 
     Logger LOGGER = LoggerFactory.getLogger(CloneRepositoryWebhookHandler.class);
-    
+
     private String repository;
     private String directory;
 
-    public CloneRepositoryWebhookHandler(String repository, String directory, String secretKey) {
-        super(secretKey);
+    public CloneRepositoryWebhookHandler(String repository, String directory) {
         this.repository = repository;
         this.directory = directory;
     }
 
     @Override
-    public void doHandle(String id, String event, String json) throws WebhookException {
+    public void handle(String id, String event, String json) throws WebhookException {
         try {
             File dir = new File(directory);
             LOGGER.debug("Cloning " + repository + " into " + dir.getAbsolutePath());

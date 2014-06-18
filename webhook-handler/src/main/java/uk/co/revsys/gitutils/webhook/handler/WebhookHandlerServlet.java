@@ -30,13 +30,11 @@ public class WebhookHandlerServlet extends HttpServlet {
         try {
             String requestId = req.getHeader("X-Github-Delivery");
             LOGGER.debug("requestId = " + requestId);
-            String signature = req.getHeader("X-Hub-Signature");
-            LOGGER.debug("signature = " + signature);
             String event = req.getHeader("X-Github-Event");
             LOGGER.debug("event = " + event);
             String json = IOUtils.toString(req.getInputStream());
             LOGGER.debug("json = " + json);
-            webhookHandler.handle(requestId, signature, event, json);
+            webhookHandler.handle(requestId, event, json);
         } catch (WebhookException ex) {
             LOGGER.error("Unable to process webhook", ex);
             throw new ServletException(ex);

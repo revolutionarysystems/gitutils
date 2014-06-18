@@ -1,2 +1,2 @@
-gitutils
+Git Utils
 ========

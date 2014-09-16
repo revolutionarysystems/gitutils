@@ -12,7 +12,7 @@
     </context-param>
     <servlet>
         <servlet-name>webhookServlet</servlet-name>
-        <servlet-class>uk.co.revsys.gitutils.webhook.handler.WebhookHandlerServlet</servlet-class>
+        <servlet-class>uk.co.revsys.gitutils.github.webhook.handler.servlet.WebhookHandlerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>webhookServlet</servlet-name>

@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>uk.co.revsys.git-utils</groupId>
-    <artifactId>git-webhook-handler</artifactId>
-    <packaging>war</packaging>
+    <artifactId>github-webhook-handler</artifactId>
+    <packaging>jar</packaging>
     <version>0.1.0-SNAPSHOT</version>
-    <name>Git Webhook Handler</name>
-    <description>Git Webhook Handler</description>
+    <name>GitHub Webhook Handler</name>
+    <description>GitHub Webhook Handler</description>
 	
     <build>
         <plugins>
@@ -110,6 +110,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
         </dependency>
         
         <dependency>

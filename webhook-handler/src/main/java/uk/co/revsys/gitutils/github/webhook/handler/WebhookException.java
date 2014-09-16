@@ -1,4 +1,4 @@
-package uk.co.revsys.gitutils.webhook.handler;
+package uk.co.revsys.gitutils.github.webhook.handler;
 
 public class WebhookException extends Exception{
 
